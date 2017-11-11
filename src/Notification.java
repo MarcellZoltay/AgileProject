@@ -9,6 +9,8 @@ public class Notification {
 
     private String notificationMode;	//hang, rezgés, akármi
 
+    private String text;
+
     public void setEvent(Event e) {
         //eltároljuk, hogy melyik eseményhez tartozik
         ownerEvent = e;
@@ -18,4 +20,9 @@ public class Notification {
         return ownerEvent;
     }
     public Date getNotificationTime() {return notificationTime;}
+
+    //az értesítés "végrehajtása" - egyelőre kiírok vmit a konzolra
+    public void execute() {
+        System.out.println("notification");
+    }
 }

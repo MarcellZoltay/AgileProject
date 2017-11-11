@@ -18,12 +18,12 @@ public class Calendar {
 
     public static void registerNotification(Notification n) {
 
-        Date t = n.getNotificationTime();
-        ArrayList<Notification> list = notifications.get(t);
+        Date date = n.getNotificationTime();
+        ArrayList<Notification> list = notifications.get(date);
         if (list == null) {
             ArrayList<Notification> newlist = new ArrayList<>();
             newlist.add(n);
-            notifications.put(t, newlist);
+            notifications.put(date, newlist);
         }
         else {
             list.add(n);
@@ -34,7 +34,15 @@ public class Calendar {
     //tick a neve, hogy világos legyen, a timerhez hasonló működés van itt
     // úgy képzeltem el, beadjuk neki, hogy mennyi az idő, és kiíratjuk, ha van ekkor értesítés
     public void tick(Date date) {
-        //...
+
+        ArrayList<Notification> list = notifications.get(date);
+        if (list == null) return;
+        else {
+            for (Notification n : list) {
+                n.execute();
+            }
+        }
+
     }
 
 }
