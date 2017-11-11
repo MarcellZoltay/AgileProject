@@ -1,10 +1,11 @@
 import java.time.LocalTime;
+import java.util.Date;
 
 public class Notification {
 
     private Event ownerEvent;
 
-    private LocalTime notificationTime;
+    private Date notificationTime;
 
     private String notificationMode;	//hang, rezgés, akármi
 
@@ -16,5 +17,5 @@ public class Notification {
     public Event getOwnerEvent() {
         return ownerEvent;
     }
-
+    public Date getNotificationTime() {return notificationTime;}
 }

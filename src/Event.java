@@ -1,5 +1,6 @@
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class Event {
 
@@ -9,8 +10,8 @@ public class Event {
     // eltárolhatunk ilyeneket, mint "otthon", "munkahely", ...
 
     private String location;
-    private LocalTime startTime;
-    private LocalTime endTime;
+    private Date startTime;
+    private Date endTime;
     private int estimatedTimeNecessary;
     private String type;
     private int priority;
