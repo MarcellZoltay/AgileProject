@@ -22,6 +22,7 @@ public class Calendar {
         ArrayList<Notification> list = notifications.get(date);
         if (list == null) {
             ArrayList<Notification> newlist = new ArrayList<>();
+
             newlist.add(n);
             notifications.put(date, newlist);
         }
@@ -29,6 +30,10 @@ public class Calendar {
             list.add(n);
         }
 
+    }
+
+    public void addEvent(Event e) {
+        events.add(e);
     }
 
     //tick a neve, hogy világos legyen, a timerhez hasonló működés van itt
