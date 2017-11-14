@@ -21,7 +21,7 @@ public class Event {
     private static int estimatedTimeNecessary;
     private static int priority;
 
-    private String location;
+    // private String location;
     private Date startTime;     //kötelező
     private Date endTime;
     private String text;        //kötelező
@@ -30,18 +30,21 @@ public class Event {
 
     public Event(Date startTime, Date endTime, String text, int priority) {
         this.startTime = startTime;
-        if (endTime == null) this.endTime = new Date(startTime.getTime() + 1 * 60 * 60 * 1000); // defaultban 1 órás események
-        this.endTime = endTime;
+
+        if (endTime == null)
+            this.endTime = new Date(startTime.getTime() + 1 * 60 * 60 * 1000); // defaultban 1 órás események
+        else
+            this.endTime = endTime;
+
         this.text = text;
         this.priority = priority;
 
-        //teszt
-        setDefaults();
+        setDefaultValues();
 
         generateNotifications();
     }
 
-    public void generateNotifications() {
+    private void generateNotifications() {
         // képleteket használva
         //   létrehozunk értesítéseket, időzítjük, ...
 
@@ -49,7 +52,7 @@ public class Event {
         double tripTime = estimatedTimeNecessary * (basePriority + (priority - 1) * 0.5);
 
         // első értesítés az indulás előtt mennyivel legyen
-        double whenToStartNotif = notificationStart * (basePriority + (priority - 1) * 0.5);
+        double preparationTime = notificationStart * (basePriority + (priority - 1) * 0.5);
 
         // hány darab értesítés legyen
         int howManyNotifs = priority;
@@ -57,17 +60,15 @@ public class Event {
         // milyen gyakran legyen értesítés
         double timeBetweenNotifs = notificationStart / (priority + 1);
 
-        // ciklus: indulunk startTime - estimatedTime - whenToStartNotif-tól
+        // ciklus: indulunk startTime - estimatedTime - preparationTime-tól
         //      hányszor: howManyNotifs
         //      lépés: howOften
         //      minden lépésnél létrehozunk egy új Notificationt, időzítjük a pillanatnyi adatok szerint
 
-        double t = startTime.getTime() - (int)tripTime - (int)whenToStartNotif;
-
-        //2147483647 ^^ itt valami hülyeség van!
+        double t = startTime.getTime() - tripTime - preparationTime;
 
         for (int i=0; i < howManyNotifs; i++) {
-            Notification n = new Notification(new Date((int)(t)));
+            Notification n = new Notification(new Date((long)(t)));
             n.setEvent(this);
             notifications.add(n);
             Calendar.registerNotification(n);
@@ -78,7 +79,7 @@ public class Event {
     }
 
     //egyelőre...
-    public void setDefaults() {
+    private void setDefaultValues() {
         notificationCount = defaultNotificationCount;
         notificationFrequency = defaultNotificationFrequency;
         notificationStart = defaultNotificationStart;
@@ -87,36 +88,13 @@ public class Event {
     }
 
     public void feedbackData() {
-        // itt finomítjuk az adatokat a visszajelzés alapján
+        //TODO: itt finomítjuk az adatokat a visszajelzés alapján
     }
 
-    public void setNotification() {
-        /*
-        Notification n = setDefaultNotification();
-        // vagy mi adunk beállításokat, vagy a setDefaultNotification-t hívjuk
-
-        // ...
-
-        n.setEvent(this);
-        notifications.add(n);
-        Calendar.registerNotification(n);
-        */
-    }
 
     @Override
     public String toString() {
         return this.text + " at " + startTime.toString();
     }
 
-    /*
-    private Notification setDefaultNotification() {
-        // ez az a metódus, ahol valamilyen algoritmus szerint "találjuk ki",
-        // hogy mikor legyen, és milyen értesítés, hány darab, stb.
-        Notification n = new Notification();
-
-        //...
-
-        return n;
-    }
-    */
 }

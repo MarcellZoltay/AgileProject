@@ -23,17 +23,11 @@ public class Calendar {
         if (list == null) {
             ArrayList<Notification> newlist = new ArrayList<>();
 
-            //TESZT
-            n.execute();
-
             newlist.add(n);
             notifications.put(date, newlist);
         }
         else {
             list.add(n);
-
-            //TESZT
-           // n.execute();
         }
 
     }
