@@ -11,6 +11,10 @@ public class Notification {
 
     private String text;
 
+    public Notification( Date time ) {
+        notificationTime = time;
+    }
+
     public void setEvent(Event e) {
         //eltároljuk, hogy melyik eseményhez tartozik
         ownerEvent = e;
@@ -23,6 +27,6 @@ public class Notification {
 
     //az értesítés "végrehajtása" - egyelőre kiírok vmit a konzolra
     public void execute() {
-        System.out.println("notification");
+        System.out.println("Notification at " + notificationTime.toString() + ", for " + ownerEvent.toString());
     }
 }
