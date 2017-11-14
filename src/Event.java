@@ -2,18 +2,30 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Date;
 
+/**
+ * Egy event adatait tároló osztály: név, kezdés, vége
+ * Ezenkívül legenerálja az eventhez tartozó notificationöket, amik gyakorisága, kezdete, stb. beállítható
+ */
 public class Event {
+
+    // ****************** ötletek ********************
 
     //lehetne a location is egy class, amiben eltároljuk az egyes helyszínekhez,
     // hogy milyen távol vannak, mennyi idő alatt szoktunk odaérni,
     // általában milyen a forgalom...
     // eltárolhatunk ilyeneket, mint "otthon", "munkahely", ...
 
+    // ***********************************************
+
+    // *** értesítések adatainak alapértékei ***
+
     public static final int defaultNotificationCount = 1;   //defaultban hány darab értesítés legyen
-    public static final int defaultNotificationFrequency = 30 * 60 * 1000; // milyen gyakran legyen értesítés, milliszekundumban, default 30 perc
-    public static final int defaultNotificationStart = 30 * 60 * 1000;  // mennyivel az esemény előtt kezdődjön az értesítés, default 30 perc
-    public static final int defaultEstimatedTime = 30 * 60 * 1000;
+    public static final int defaultNotificationFrequency = new TimeToMs(30).minutes(); // milyen gyakran legyen értesítés, milliszekundumban, default 30 perc
+    public static final int defaultNotificationStart = new TimeToMs(30).minutes();  // mennyivel az esemény előtt kezdődjön az értesítés, default 30 perc
+    public static final int defaultEstimatedTime = new TimeToMs(30).minutes();
     public static final int basePriority = 1;
+
+    // *** értesítések adatai ***
 
     private static int notificationCount;      // ezek azok az értékek, amiket állítunk, amiket a felhasználó "finomíthat"
     private static int notificationFrequency;
@@ -21,18 +33,23 @@ public class Event {
     private static int estimatedTimeNecessary;
     private static int priority;
 
+    // *** esemény adatai ***
+
     // private String location;
     private Date startTime;     //kötelező
     private Date endTime;
     private String text;        //kötelező
 
+    /**
+     * Eseményhez tartozó értesítések
+     */
     private ArrayList<Notification> notifications = new ArrayList<>();
 
     public Event(Date startTime, Date endTime, String text, int priority) {
         this.startTime = startTime;
 
         if (endTime == null)
-            this.endTime = new Date(startTime.getTime() + 1 * 60 * 60 * 1000); // defaultban 1 órás események
+            this.endTime = new Date(startTime.getTime() + new TimeToMs(1).hours()); // defaultban 1 órás események
         else
             this.endTime = endTime;
 
