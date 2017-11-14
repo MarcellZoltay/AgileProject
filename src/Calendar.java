@@ -31,6 +31,10 @@ public class Calendar {
 
     }
 
+    public void addEvent(Event e) {
+        events.add(e);
+    }
+
     //tick a neve, hogy világos legyen, a timerhez hasonló működés van itt
     // úgy képzeltem el, beadjuk neki, hogy mennyi az idő, és kiíratjuk, ha van ekkor értesítés
     public void tick(Date date) {

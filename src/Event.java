@@ -10,12 +10,18 @@ public class Event {
     // eltárolhatunk ilyeneket, mint "otthon", "munkahely", ...
 
     private String location;
-    private Date startTime;
-    private Date endTime;
+    private Date startTime;     //kötelező
+    private Date endTime;       //kötelező
     private int estimatedTimeNecessary;
-    private String type;
+    private String text;        //kötelező
     private int priority;
     private ArrayList<Notification> notifications = new ArrayList<>();
+
+    public Event(Date startTime, Date endTime, String text) {
+        this.startTime = startTime;
+        this.endTime = endTime;
+        this.text = text;
+    }
 
     public void setNotification() {
 
