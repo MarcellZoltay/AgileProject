@@ -88,7 +88,7 @@ public class Event {
             Notification n = new Notification(new Date((long)(t)));
             n.setEvent(this);
             notifications.add(n);
-            Calendar.registerNotification(n);
+            Calendar.getInstance().registerNotification(n);
 
             t += timeBetweenNotifs;
         }

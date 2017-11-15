@@ -19,20 +19,26 @@ public class Calendar {
     /**
      * Eventek listája
      */
-    private static ArrayList<Event> events = new ArrayList<>();	// csak hogy valahol el legyenek tárolva
+    private ArrayList<Event> events = new ArrayList<>();	// csak hogy valahol el legyenek tárolva
 
     // Az értesítéseket egy map-ben tároljuk, ahol a kulcs az értesítés időpontja,
     //  a hozzá tartozó érték egy lista, ha esetleg több értesítést is kell megjeleníteni azonos időpontban.
     /**
      * Adott időponthoz tartozó értesítések listája
      */
-    private static HashMap<Date, ArrayList<Notification> > notifications = new HashMap<>();
+    private HashMap<Date, ArrayList<Notification> > notifications = new HashMap<>();
+
+    /// SINGLETON ///
+    private static Calendar instance = new Calendar();
+    public static Calendar getInstance(){ return instance; }
+
+    private Calendar(){}
 
     /**
      * Notification beregisztrálása a megfelelő dátumhoz
      * @param n A regisztrálandó notification
      */
-    public static void registerNotification(Notification n) {
+    public void registerNotification(Notification n) {
 
         Date date = n.getNotificationTime();
         ArrayList<Notification> list = notifications.get(date);
