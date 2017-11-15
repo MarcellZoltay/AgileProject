@@ -30,12 +30,12 @@ public class Event {
     private static int notificationCount;      // ezek azok az értékek, amiket állítunk, amiket a felhasználó "finomíthat"
     private static int notificationFrequency;
     private static int notificationStart;
-    private static int estimatedTimeNecessary;
-    private static int priority;
+    private int estimatedTimeNecessary;
+    private int priority;
 
     // *** esemény adatai ***
 
-    // private String location;
+    private Location location;
     private Date startTime;     //kötelező
     private Date endTime;
     private String text;        //kötelező
@@ -108,6 +108,40 @@ public class Event {
         //TODO: itt finomítjuk az adatokat a visszajelzés alapján
     }
 
+    public void setLocation(Location location) {
+        this.location = location;
+    }
+
+    public int getTravelTime() {
+        return (int)(this.estimatedTimeNecessary / 60 / 1000);
+    }
+
+    public int getTravelTimeWithPriority() {
+        double tripTime = estimatedTimeNecessary * (basePriority + (priority - 1) * 0.5);
+        return (int)(tripTime / 60 / 1000);
+    }
+
+    public void setTravelTime(int travelMinutes) {
+        this.estimatedTimeNecessary = new TimeToMs(travelMinutes).minutes();
+    }
+
+    // *** getterek ***
+
+    public Date getStartTime() {
+        return startTime;
+    }
+
+    public Date getEndTime() {
+        return endTime;
+    }
+
+    public String getText() {
+        return text;
+    }
+
+    public Location getLocation() {
+        return location;
+    }
 
     @Override
     public String toString() {
