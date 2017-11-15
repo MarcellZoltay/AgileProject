@@ -108,19 +108,40 @@ public class Event {
         //TODO: itt finomítjuk az adatokat a visszajelzés alapján
     }
 
+    /**
+     * Beállítja az esemény helyszínét a megadott helyre
+     * @param location Az esemény leendő helyszíne
+     */
     public void setLocation(Location location) {
         this.location = location;
     }
 
+    /**
+     * Beállított útidő lekérése
+     * Ez előre meg van adva, egy fix másik helyhez képest.
+     * Kicsit nehézkes így, viszont így nem kellett módosítani az eddigi kódon
+     * @return Az útidő percekben
+     */
     public int getTravelTime() {
         return (int)(this.estimatedTimeNecessary / 60 / 1000);
     }
 
+    /**
+     * A súlyozó logikával együtt vett, előre beállított útidő lekérése
+     * Az útidő előre meg van adva, egy fix másik helyhez képest.
+     * Kicsit nehézkes így, viszont így nem kellett módosítani az eddigi kódon
+     * @return A súlyozott útidő percekben
+     */
     public int getTravelTimeWithPriority() {
         double tripTime = estimatedTimeNecessary * (basePriority + (priority - 1) * 0.5);
         return (int)(tripTime / 60 / 1000);
     }
 
+    /**
+     * Egy fix helyszínhez vett utazási idő beállítása percekben
+     * Az eddigi logikát nem bántja, kicsit nehézkes
+     * @param travelMinutes Útidő percben
+     */
     public void setTravelTime(int travelMinutes) {
         this.estimatedTimeNecessary = new TimeToMs(travelMinutes).minutes();
     }

@@ -23,7 +23,7 @@ public class Main {
         finish.set(2017, java.util.Calendar.NOVEMBER, 15, 14, 0);
         Event agilisOra = new Event(start.getTime(), finish.getTime(), "Agilis ora", 2);
         agilisOra.setLocation(iq);
-        elsoOra.setTravelTime(TravelHelper.getTravelMinutes(petofi, iq, TravelHelper.WalkSpeed));
+        agilisOra.setTravelTime(TravelHelper.getTravelMinutes(petofi, iq, TravelHelper.WalkSpeed));
 
         start.set(2017, java.util.Calendar.NOVEMBER, 15, 20, 0);
         finish.set(2017, java.util.Calendar.NOVEMBER, 15, 23, 0);
