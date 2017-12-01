@@ -46,6 +46,17 @@ public class Event {
     private ArrayList<Notification> notifications = new ArrayList<>();
 
     public Event(Date startTime, Date endTime, String text, int priority) {
+        this(startTime, endTime, text);
+
+        if(priority > 5)
+            this.priority = 5;
+        else if(priority < 1)
+            this.priority = 1;
+        else
+            this.priority = priority;
+    }
+
+    public Event(Date startTime, Date endTime, String text) {
         this.startTime = startTime;
 
         if (endTime == null)
@@ -54,9 +65,8 @@ public class Event {
             this.endTime = endTime;
 
         this.text = text;
-        this.priority = priority;
 
-        setDefaultValues();
+        setDefaultValues(); // Itt beállítunk egy base priority-t
 
         generateNotifications();
     }
