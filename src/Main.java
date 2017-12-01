@@ -27,11 +27,26 @@ public class Main {
 
         start.set(2017, java.util.Calendar.NOVEMBER, 15, 20, 0);
         finish.set(2017, java.util.Calendar.NOVEMBER, 15, 23, 0);
-        Event sorozes = new Event(start.getTime(), finish.getTime(), "Sorozes", 2);
+        Event sorozes = new Event(start.getTime(), finish.getTime(), "Sorozes", 4);
         sorozes.setLocation(corvin);
         sorozes.setTravelTime(TravelHelper.getTravelMinutes(iq, corvin, TravelHelper.PublicTransportSpeed));
 
         //Event e1 = new Event( new Date(), null, "Talalkozo Kataval", 2);
+
+        // a továbbiakban "start"-ot növeljük, 7:00-tól megyünk 20:00-ig
+        start.set(2017, java.util.Calendar.NOVEMBER, 15, 7, 0);
+        finish.set(2017, java.util.Calendar.NOVEMBER, 15, 20, 0);
+
+        while (true) {
+
+            Date dt = start.getTime();
+            if (dt.after(finish.getTime())) { break; }
+
+            Calendar c = Calendar.getInstance();
+            c.tick(dt); //kiírja, ha van valami értesítés erre az időpontra
+            start.add(java.util.Calendar.MINUTE, 1);
+
+        }
 
     }
 }
