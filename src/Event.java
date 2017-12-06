@@ -54,6 +54,8 @@ public class Event {
             this.priority = 1;
         else
             this.priority = priority;
+
+        generateNotifications();
     }
 
     public Event(Date startTime, Date endTime, String text) {
@@ -68,7 +70,7 @@ public class Event {
 
         setDefaultValues(); // Itt beállítunk egy base priority-t
 
-        generateNotifications();
+       // generateNotifications();
     }
 
     private void generateNotifications() {

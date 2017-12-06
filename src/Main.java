@@ -4,7 +4,7 @@ public class Main {
 
     public static void main(String[] args)
     {
-        System.out.println("Hello World!");
+        //System.out.println("Hello World!");
 
         Location petofi = new Location("Petőfi híd budai hídfő", 47.477103, 19.059922);
         Location corvin = new Location("Corvin negyed", 47.485722, 19.069985);
@@ -36,6 +36,7 @@ public class Main {
         // a továbbiakban "start"-ot növeljük, 7:00-tól megyünk 20:00-ig
         start.set(2017, java.util.Calendar.NOVEMBER, 15, 7, 0);
         finish.set(2017, java.util.Calendar.NOVEMBER, 15, 20, 0);
+
 
         while (true) {
 
